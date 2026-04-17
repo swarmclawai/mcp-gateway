@@ -2,28 +2,45 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 
-export const serverSpecSchema = z.object({
-  name: z
-    .string()
-    .min(1)
-    .regex(
-      /^[a-z][a-z0-9_]*$/,
-      "server name must be lowercase alphanumeric with underscores and start with a letter"
-    )
-    .max(64),
-  command: z.string().min(1),
-  args: z.array(z.string()).default([]),
-  env: z.record(z.string()).optional(),
-  cwd: z.string().optional(),
-  alwaysExpose: z
-    .union([z.boolean(), z.array(z.string())])
-    .default(false)
-    .describe(
-      "true = always expose all tools; array = only pre-load listed tool names; false = lazy"
-    ),
-  enabled: z.boolean().default(true),
-  description: z.string().optional(),
-});
+export const serverSpecSchema = z
+  .object({
+    name: z
+      .string()
+      .min(1)
+      .regex(
+        /^[a-z][a-z0-9_]*$/,
+        "server name must be lowercase alphanumeric with underscores and start with a letter"
+      )
+      .max(64),
+    // Stdio-transport fields — set when spawning a local process.
+    command: z.string().min(1).optional(),
+    args: z.array(z.string()).default([]),
+    env: z.record(z.string()).optional(),
+    cwd: z.string().optional(),
+    // HTTP-transport fields — set when pointing at a streamable-http endpoint.
+    url: z.string().url().optional(),
+    headers: z.record(z.string()).optional(),
+    // Common fields.
+    alwaysExpose: z
+      .union([z.boolean(), z.array(z.string())])
+      .default(false)
+      .describe(
+        "true = always expose all tools; array = only pre-load listed tool names; false = lazy"
+      ),
+    enabled: z.boolean().default(true),
+    description: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    const hasCommand = !!data.command;
+    const hasUrl = !!data.url;
+    if (hasCommand === hasUrl) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "server must set exactly one of 'command' (stdio) or 'url' (http)",
+        path: [],
+      });
+    }
+  });
 
 export type ServerSpec = z.infer<typeof serverSpecSchema>;
 

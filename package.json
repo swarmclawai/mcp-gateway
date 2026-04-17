@@ -1,75 +1,28 @@
 {
-  "name": "@swarmclawai/mcp-gateway",
-  "version": "0.1.0",
-  "description": "Local MCP gateway that lazy-loads tool schemas and namespaces downstream servers so your coding agent's context isn't eaten by MCP boilerplate. Built for agents.",
+  "name": "mcp-gateway-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Monorepo root for @swarmclawai/mcp-core and @swarmclawai/mcp-gateway.",
   "license": "MIT",
-  "author": "SwarmClaw AI",
-  "homepage": "https://github.com/swarmclawai/mcp-gateway",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/swarmclawai/mcp-gateway.git"
-  },
-  "bugs": {
-    "url": "https://github.com/swarmclawai/mcp-gateway/issues"
-  },
-  "keywords": [
-    "mcp",
-    "model-context-protocol",
-    "mcp-gateway",
-    "mcp-proxy",
-    "claude-code",
-    "cursor",
-    "cline",
-    "ai-agents",
-    "coding-agents",
-    "cli",
-    "agent-cli",
-    "context-window",
-    "llm"
-  ],
   "type": "module",
   "engines": {
     "node": ">=20"
   },
-  "bin": {
-    "mcp-gateway": "./dist/cli.js"
-  },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "README.md",
-    "CONTRIBUTING.md",
-    "AGENTS.md",
-    "LICENSE"
-  ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build && pnpm run test && pnpm run typecheck"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.4",
-    "commander": "^12.1.0",
-    "zod": "^3.23.8"
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck",
+    "dev": "pnpm --filter @swarmclawai/mcp-gateway run dev",
+    "bench": "tsx scripts/benchmark.ts",
+    "sync-docs": "node scripts/sync-docs.mjs"
   },
   "devDependencies": {
+    "@swarmclawai/mcp-core": "workspace:^",
     "@types/node": "^20.12.12",
     "tsup": "^8.1.0",
+    "tsx": "^4.16.0",
     "typescript": "^5.5.0",
     "vitest": "^1.6.0"
-  },
-  "publishConfig": {
-    "access": "public"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

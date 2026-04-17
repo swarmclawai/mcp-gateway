@@ -1,0 +1,63 @@
+{
+  "name": "@swarmclawai/mcp-core",
+  "version": "0.1.0",
+  "description": "Transport-agnostic MCP gateway primitives: downstream multiplexing, tool namespacing, lazy connect, token estimation. Shared by @swarmclawai/mcp-gateway and embedders like SwarmClaw.",
+  "license": "MIT",
+  "author": "SwarmClaw AI",
+  "homepage": "https://github.com/swarmclawai/mcp-gateway",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swarmclawai/mcp-gateway.git",
+    "directory": "packages/mcp-core"
+  },
+  "bugs": {
+    "url": "https://github.com/swarmclawai/mcp-gateway/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-gateway",
+    "mcp-proxy",
+    "ai-agents",
+    "coding-agents",
+    "llm"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run build && pnpm run test && pnpm run typecheck"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.0",
+    "vitest": "^1.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

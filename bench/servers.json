@@ -1,0 +1,47 @@
+{
+  "$comment": "Curated list of public MCP servers to include in the leaderboard. Keep to servers that run via npx or docker with no required API keys — anything needing a secret will just fail in CI. Add a server here, open a PR.",
+  "servers": [
+    {
+      "name": "filesystem",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "category": "filesystem"
+    },
+    {
+      "name": "fetch",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "category": "web"
+    },
+    {
+      "name": "memory",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "category": "memory"
+    },
+    {
+      "name": "sequentialthinking",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
+      "category": "reasoning"
+    },
+    {
+      "name": "git",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "category": "vcs"
+    },
+    {
+      "name": "time",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-time"],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
+      "category": "utilities"
+    }
+  ]
+}

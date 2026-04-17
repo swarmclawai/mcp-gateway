@@ -10,10 +10,16 @@ import {
   configSchema,
   serverSpecSchema,
   type GatewayConfig,
-} from "./config.js";
+} from "@swarmclawai/mcp-core";
 import { Gateway } from "./server.js";
+import {
+  AGENT_TARGETS,
+  findTarget,
+  planInstall,
+  type McpServersContainer,
+} from "./agent-targets.js";
 
-const PKG_VERSION = "0.1.0";
+const PKG_VERSION = "0.2.0";
 const OK = 0;
 const USER_ERROR = 1;
 const INTERNAL_ERROR = 2;
@@ -91,9 +97,21 @@ function buildProgram(): Command {
 
   program
     .command("start")
-    .description("start the gateway (speaks MCP over stdio to the upstream client)")
+    .description(
+      "start the gateway. Default: stdio for an upstream MCP client. Pass --http to expose a streamable-http endpoint at POST /mcp instead."
+    )
+    .option("--http", "run as a streamable-http server instead of stdio")
+    .option("--port <n>", "port to listen on (http mode only, default 3477)", (v) => {
+      const n = Number.parseInt(v, 10);
+      if (!Number.isFinite(n) || n <= 0 || n > 65535) {
+        throw new InvalidArgumentError("port must be an integer in [1, 65535]");
+      }
+      return n;
+    })
+    .option("--host <addr>", "host to bind on (http mode only, default 127.0.0.1)")
     .action(async (_opts, cmd: Command) => {
       const flags = mergeFlags(cmd);
+      const opts = cmd.opts<{ http?: boolean; port?: number; host?: string }>();
       try {
         const config = await readConfig(flags);
         const gateway = new Gateway({
@@ -108,7 +126,11 @@ function buildProgram(): Command {
         };
         process.on("SIGINT", shutdown);
         process.on("SIGTERM", shutdown);
-        await gateway.start();
+        if (opts.http) {
+          await gateway.startHttp(opts.port ?? 3477, opts.host ?? "127.0.0.1");
+        } else {
+          await gateway.start();
+        }
       } catch (err) {
         exitUserOrInternal(err, flags);
       }
@@ -321,6 +343,91 @@ function buildProgram(): Command {
           successJson({ config: starter, wouldWriteTo: configPath });
         } else {
           process.stdout.write(serialized);
+        }
+        process.exit(OK);
+      } catch (err) {
+        exitUserOrInternal(err, flags);
+      }
+    });
+
+  program
+    .command("add")
+    .description(
+      "install mcp-gateway into an upstream agent's MCP config (claude-code, cursor, cline, windsurf, ...)"
+    )
+    .argument("<agent>", `agent slug: ${AGENT_TARGETS.map((t) => t.id).join(", ")}`)
+    .option("--config-path <path>", "override the agent's config file location")
+    .option("--name <name>", "name of the entry to create (default: mcp-gateway)")
+    .option("--gateway-cwd <path>", "cwd for the spawned mcp-gateway process (where mcp-gateway.config.json lives)")
+    .option("--dry-run", "print the planned change without writing anything")
+    .option("--force", "overwrite an existing entry with the same name if it differs")
+    .action(async (agent: string, _opts, cmd: Command) => {
+      const flags = mergeFlags(cmd);
+      const opts = cmd.opts<{
+        configPath?: string;
+        name?: string;
+        gatewayCwd?: string;
+        dryRun?: boolean;
+        force?: boolean;
+      }>();
+      try {
+        const target = findTarget(agent);
+        if (!target) {
+          throw new Error(
+            `unknown agent '${agent}'. Supported: ${AGENT_TARGETS.map((t) => t.id).join(", ")}`
+          );
+        }
+        const configPath = opts.configPath
+          ? resolveArg(opts.configPath, flags)
+          : target.defaultConfigPath();
+        const entryName = opts.name ?? "mcp-gateway";
+        const gatewayCwd = opts.gatewayCwd
+          ? resolveArg(opts.gatewayCwd, flags)
+          : undefined;
+        const configExists = await fs.stat(configPath).then(() => true).catch(() => false);
+        const existing: McpServersContainer | undefined = configExists
+          ? (JSON.parse(await fs.readFile(configPath, "utf8")) as McpServersContainer)
+          : undefined;
+        const { next, plan } = planInstall(existing, {
+          target,
+          configPath,
+          entryName,
+          gatewayCwd,
+        });
+        if (plan.action === "replace" && !opts.force) {
+          throw new Error(
+            `an entry named '${entryName}' already exists in ${configPath} with a different command. Re-run with --force to overwrite, or pick a new --name.`
+          );
+        }
+        const serialized = JSON.stringify(next, null, 2) + "\n";
+        if (opts.dryRun) {
+          if (flags.json) {
+            successJson({ action: plan.action, path: configPath, config: next });
+          } else {
+            process.stdout.write(
+              `[dry-run] would ${plan.action} '${entryName}' in ${configPath}\n`
+            );
+            process.stdout.write(serialized);
+          }
+          process.exit(OK);
+        }
+        if (plan.action === "noop") {
+          if (flags.json) successJson({ action: "noop", path: configPath });
+          else log(`ok: '${entryName}' already installed in ${configPath}`, flags);
+          process.exit(OK);
+        }
+        if (configExists) {
+          await fs.copyFile(configPath, `${configPath}.bak`);
+        } else {
+          await fs.mkdir(path.dirname(configPath), { recursive: true });
+        }
+        await fs.writeFile(configPath, serialized, "utf8");
+        if (flags.json) {
+          successJson({ action: plan.action, path: configPath, entry: plan.entry });
+        } else {
+          log(`${plan.action}d '${entryName}' in ${configPath}`, flags);
+          if (configExists) log(`backup: ${configPath}.bak`, flags);
+          if (target.notes) log(target.notes, flags);
         }
         process.exit(OK);
       } catch (err) {

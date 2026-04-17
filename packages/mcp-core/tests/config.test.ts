@@ -53,6 +53,51 @@ describe("config", () => {
     ).toThrow();
   });
 
+  it("accepts a URL-based HTTP server spec", () => {
+    const cfg = parseConfig({
+      version: 1,
+      servers: [
+        { name: "remote", url: "https://example.com/mcp", alwaysExpose: true },
+      ],
+    });
+    expect(cfg.servers[0].url).toBe("https://example.com/mcp");
+    expect(cfg.servers[0].command).toBeUndefined();
+  });
+
+  it("rejects a spec with both command and url", () => {
+    expect(() =>
+      parseConfig({
+        version: 1,
+        servers: [
+          { name: "bad", command: "x", url: "https://example.com/mcp" },
+        ],
+      })
+    ).toThrow(/exactly one of/);
+  });
+
+  it("rejects a spec with neither command nor url", () => {
+    expect(() =>
+      parseConfig({
+        version: 1,
+        servers: [{ name: "naked" }],
+      })
+    ).toThrow(/exactly one of/);
+  });
+
+  it("accepts headers on an HTTP server", () => {
+    const cfg = parseConfig({
+      version: 1,
+      servers: [
+        {
+          name: "remote",
+          url: "https://example.com/mcp",
+          headers: { Authorization: "Bearer abc" },
+        },
+      ],
+    });
+    expect(cfg.servers[0].headers).toEqual({ Authorization: "Bearer abc" });
+  });
+
   it("resolvedServerAlwaysExposed handles all three modes", () => {
     const spec = {
       name: "a",

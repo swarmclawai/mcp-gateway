@@ -1,5 +1,5 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
-import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
+import type { Transport } from "@modelcontextprotocol/sdk/shared/transport.js";
 import type { Tool } from "@modelcontextprotocol/sdk/types.js";
 import { resolvedServerAlwaysExposed, type ServerSpec } from "./config.js";
 
@@ -19,14 +19,22 @@ export interface DownstreamClient {
   tools: DownstreamTool[];
   lastError?: string;
   _client?: Client;
-  _transport?: StdioClientTransport;
+  _transport?: Transport;
 }
+
+export type ClientTransportFactory = (spec: ServerSpec) => Transport;
 
 export interface DownstreamManagerOptions {
   namespaceSeparator: string;
   onLog?: (msg: string) => void;
   clientName?: string;
   clientVersion?: string;
+  /**
+   * Factory that produces a Transport for a given downstream spec. Embedders
+   * can inject HTTP/SSE/in-memory transports; the CLI gateway uses the stdio
+   * factory exported from `@swarmclawai/mcp-core`.
+   */
+  transportFactory?: ClientTransportFactory;
 }
 
 export class DownstreamManager {
@@ -51,13 +59,13 @@ export class DownstreamManager {
   async connect(name: string): Promise<void> {
     const ds = this.mustGet(name);
     if (ds.status === "ready" || ds.status === "connecting") return;
+    if (!this.opts.transportFactory) {
+      throw new Error(
+        "DownstreamManager requires a transportFactory for connect(); inject one via constructor options"
+      );
+    }
     ds.status = "connecting";
-    const transport = new StdioClientTransport({
-      command: ds.spec.command,
-      args: ds.spec.args,
-      env: ds.spec.env,
-      cwd: ds.spec.cwd,
-    });
+    const transport = this.opts.transportFactory(ds.spec);
     const client = new Client(
       {
         name: this.opts.clientName ?? "mcp-gateway",
