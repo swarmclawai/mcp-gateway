@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
       - uses: actions/setup-node@v4
@@ -29,11 +29,23 @@ jobs:
       - run: pnpm -r run build
       - run: pnpm -r run typecheck
       - run: pnpm -r run test
-      - name: Publish mcp-core
+      - name: Publish mcp-core if not already on npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm --filter @swarmclawai/mcp-core publish --access public --no-git-checks
-      - name: Publish mcp-gateway
+        run: |
+          VERSION=$(node -p "require('./packages/mcp-core/package.json').version")
+          if npm view @swarmclawai/mcp-core@${VERSION} version >/dev/null 2>&1; then
+            echo "@swarmclawai/mcp-core@${VERSION} already published — skipping"
+          else
+            pnpm --filter @swarmclawai/mcp-core publish --access public --no-git-checks
+          fi
+      - name: Publish mcp-gateway if not already on npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm --filter @swarmclawai/mcp-gateway publish --access public --no-git-checks
+        run: |
+          VERSION=$(node -p "require('./packages/mcp-gateway/package.json').version")
+          if npm view @swarmclawai/mcp-gateway@${VERSION} version >/dev/null 2>&1; then
+            echo "@swarmclawai/mcp-gateway@${VERSION} already published — skipping"
+          else
+            pnpm --filter @swarmclawai/mcp-gateway publish --access public --no-git-checks
+          fi

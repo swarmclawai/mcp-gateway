@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
+      - uses: pnpm/action-setup@v4
         with:
           version: 10
       - uses: actions/setup-node@v4
@@ -30,12 +30,20 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm -r run build
       - name: Run benchmark
-        run: pnpm tsx scripts/benchmark.ts
+        run: pnpm bench
+        # The benchmark script already catches per-server errors and records
+        # them as status=error. Don't block later steps on a script crash —
+        # still commit whatever partial results exist.
+        continue-on-error: true
       - name: Commit results
         if: github.event_name != 'pull_request'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ ! -f bench/results.json ]; then
+            echo "no results.json — nothing to commit"
+            exit 0
+          fi
           git add bench/results.json bench/leaderboard.md
           if git diff --cached --quiet; then
             echo "no changes to commit"

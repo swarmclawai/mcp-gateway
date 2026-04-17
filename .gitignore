@@ -1,4 +1,5 @@
 spec.md
+docs/launch-post.md
 dist/
 *.tsbuildinfo
 node_modules/

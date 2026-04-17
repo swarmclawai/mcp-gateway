@@ -22,6 +22,8 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run typecheck
+      # build must run before typecheck so mcp-gateway's tsc can resolve
+      # @swarmclawai/mcp-core type declarations from the sibling package's dist/.
       - run: pnpm run build
+      - run: pnpm run typecheck
       - run: pnpm run test
