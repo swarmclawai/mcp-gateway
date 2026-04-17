@@ -1,0 +1,10 @@
+spec.md
+dist/
+*.tsbuildinfo
+node_modules/
+coverage/
+.vitest/
+.env
+.env.*
+!.env.example
+.DS_Store

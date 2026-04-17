@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "namespaceSeparator": "__",
+  "servers": [
+    {
+      "name": "fs",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "alwaysExpose": true,
+      "enabled": true,
+      "description": "Filesystem access, pre-exposed because it's used constantly"
+    },
+    {
+      "name": "github",
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "alwaysExpose": false,
+      "enabled": true,
+      "description": "Lazy-loaded — only surfaces when a github__ tool is called"
+    },
+    {
+      "name": "sentry",
+      "command": "npx",
+      "args": ["-y", "@sentry/mcp-server@latest"],
+      "env": { "SENTRY_AUTH_TOKEN": "" },
+      "alwaysExpose": ["issue_details"],
+      "enabled": true,
+      "description": "Only issue_details is pre-exposed; the rest is lazy"
+    }
+  ]
+}
