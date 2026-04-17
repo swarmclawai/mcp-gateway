@@ -1,0 +1,202 @@
+{
+  "generatedAt": "2026-04-17T21:02:40.152Z",
+  "gatewayVersion": "0.2.0",
+  "totals": {
+    "servers": 6,
+    "ok": 6,
+    "error": 0,
+    "totalTokens": 4657
+  },
+  "entries": [
+    {
+      "name": "filesystem",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "."
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "category": "filesystem",
+      "durationMs": 4182,
+      "status": "ok",
+      "tokens": 2297,
+      "tools": 14,
+      "toolBreakdown": [
+        {
+          "name": "filesystem__read_file",
+          "tokens": 135
+        },
+        {
+          "name": "filesystem__read_text_file",
+          "tokens": 243
+        },
+        {
+          "name": "filesystem__read_media_file",
+          "tokens": 90
+        },
+        {
+          "name": "filesystem__read_multiple_files",
+          "tokens": 198
+        },
+        {
+          "name": "filesystem__write_file",
+          "tokens": 132
+        },
+        {
+          "name": "filesystem__edit_file",
+          "tokens": 211
+        },
+        {
+          "name": "filesystem__create_directory",
+          "tokens": 146
+        },
+        {
+          "name": "filesystem__list_directory",
+          "tokens": 145
+        },
+        {
+          "name": "filesystem__list_directory_with_sizes",
+          "tokens": 184
+        },
+        {
+          "name": "filesystem__directory_tree",
+          "tokens": 181
+        },
+        {
+          "name": "filesystem__move_file",
+          "tokens": 163
+        },
+        {
+          "name": "filesystem__search_files",
+          "tokens": 210
+        },
+        {
+          "name": "filesystem__get_file_info",
+          "tokens": 141
+        },
+        {
+          "name": "filesystem__list_allowed_directories",
+          "tokens": 118
+        }
+      ]
+    },
+    {
+      "name": "fetch",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-fetch"
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
+      "category": "web",
+      "durationMs": 579,
+      "status": "ok",
+      "tokens": 0,
+      "tools": 0,
+      "toolBreakdown": []
+    },
+    {
+      "name": "memory",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
+      "category": "memory",
+      "durationMs": 1821,
+      "status": "ok",
+      "tokens": 1211,
+      "tools": 9,
+      "toolBreakdown": [
+        {
+          "name": "memory__create_entities",
+          "tokens": 175
+        },
+        {
+          "name": "memory__create_relations",
+          "tokens": 184
+        },
+        {
+          "name": "memory__add_observations",
+          "tokens": 160
+        },
+        {
+          "name": "memory__delete_entities",
+          "tokens": 105
+        },
+        {
+          "name": "memory__delete_observations",
+          "tokens": 161
+        },
+        {
+          "name": "memory__delete_relations",
+          "tokens": 182
+        },
+        {
+          "name": "memory__read_graph",
+          "tokens": 51
+        },
+        {
+          "name": "memory__search_nodes",
+          "tokens": 99
+        },
+        {
+          "name": "memory__open_nodes",
+          "tokens": 94
+        }
+      ]
+    },
+    {
+      "name": "sequentialthinking",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
+      "category": "reasoning",
+      "durationMs": 2066,
+      "status": "ok",
+      "tokens": 1149,
+      "tools": 1,
+      "toolBreakdown": [
+        {
+          "name": "sequentialthinking__sequentialthinking",
+          "tokens": 1149
+        }
+      ]
+    },
+    {
+      "name": "git",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-git"
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
+      "category": "vcs",
+      "durationMs": 636,
+      "status": "ok",
+      "tokens": 0,
+      "tools": 0,
+      "toolBreakdown": []
+    },
+    {
+      "name": "time",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-time"
+      ],
+      "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
+      "category": "utilities",
+      "durationMs": 576,
+      "status": "ok",
+      "tokens": 0,
+      "tools": 0,
+      "toolBreakdown": []
+    }
+  ]
+}
