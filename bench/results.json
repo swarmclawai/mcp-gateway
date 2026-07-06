@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-06-29T12:25:20.826Z",
+  "generatedAt": "2026-07-06T11:58:06.113Z",
   "gatewayVersion": "0.2.0",
   "totals": {
     "servers": 6,
     "ok": 6,
     "error": 0,
-    "totalTokens": 4657
+    "totalTokens": 4652
   },
   "entries": [
     {
@@ -18,7 +18,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
       "category": "filesystem",
-      "durationMs": 5096,
+      "durationMs": 4918,
       "status": "ok",
       "tokens": 2297,
       "tools": 14,
@@ -90,7 +90,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
       "category": "web",
-      "durationMs": 734,
+      "durationMs": 766,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -105,7 +105,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
       "category": "memory",
-      "durationMs": 2307,
+      "durationMs": 2493,
       "status": "ok",
       "tokens": 1211,
       "tools": 9,
@@ -157,14 +157,14 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
       "category": "reasoning",
-      "durationMs": 2788,
+      "durationMs": 2853,
       "status": "ok",
-      "tokens": 1149,
+      "tokens": 1144,
       "tools": 1,
       "toolBreakdown": [
         {
           "name": "sequentialthinking__sequentialthinking",
-          "tokens": 1149
+          "tokens": 1144
         }
       ]
     },
@@ -177,7 +177,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
       "category": "vcs",
-      "durationMs": 783,
+      "durationMs": 967,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -192,7 +192,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
       "category": "utilities",
-      "durationMs": 886,
+      "durationMs": 933,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
