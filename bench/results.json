@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-07-06T11:58:06.113Z",
+  "generatedAt": "2026-07-13T10:53:05.695Z",
   "gatewayVersion": "0.2.0",
   "totals": {
     "servers": 6,
     "ok": 6,
     "error": 0,
-    "totalTokens": 4652
+    "totalTokens": 4686
   },
   "entries": [
     {
@@ -18,9 +18,9 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
       "category": "filesystem",
-      "durationMs": 4918,
+      "durationMs": 3613,
       "status": "ok",
-      "tokens": 2297,
+      "tokens": 2331,
       "tools": 14,
       "toolBreakdown": [
         {
@@ -33,7 +33,7 @@
         },
         {
           "name": "filesystem__read_media_file",
-          "tokens": 90
+          "tokens": 124
         },
         {
           "name": "filesystem__read_multiple_files",
@@ -90,7 +90,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
       "category": "web",
-      "durationMs": 766,
+      "durationMs": 607,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -105,7 +105,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
       "category": "memory",
-      "durationMs": 2493,
+      "durationMs": 1885,
       "status": "ok",
       "tokens": 1211,
       "tools": 9,
@@ -157,7 +157,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
       "category": "reasoning",
-      "durationMs": 2853,
+      "durationMs": 2149,
       "status": "ok",
       "tokens": 1144,
       "tools": 1,
@@ -177,7 +177,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
       "category": "vcs",
-      "durationMs": 967,
+      "durationMs": 612,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -192,7 +192,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
       "category": "utilities",
-      "durationMs": 933,
+      "durationMs": 589,
       "status": "ok",
       "tokens": 0,
       "tools": 0,

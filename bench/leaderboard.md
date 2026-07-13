@@ -1,8 +1,8 @@
 # MCP Server Token Leaderboard
 
-_Generated: 2026-07-06T11:58:06.113Z · gateway v0.2.0_
+_Generated: 2026-07-13T10:53:05.695Z · gateway v0.2.0_
 
-**6** of 6 benchmarked servers started successfully, spending **4,652** tokens total on tool schemas.
+**6** of 6 benchmarked servers started successfully, spending **4,686** tokens total on tool schemas.
 
 > Measured by connecting each server and running `list_tools`, then summing estimated tokens across every advertised tool (name + description + JSON Schema). Numbers are directional — an MCP client that picks up 5 of these is spending this much just on boilerplate before you type a message.
 
@@ -15,13 +15,13 @@ _Generated: 2026-07-06T11:58:06.113Z · gateway v0.2.0_
 | 3 | [time](https://github.com/modelcontextprotocol/servers/tree/main/src/time) | 0 | 0 | utilities |
 | 4 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,144 | reasoning |
 | 5 | [memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) | 9 | 1,211 | memory |
-| 6 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,297 | filesystem |
+| 6 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,331 | filesystem |
 
 ## Top 10 heaviest servers
 
 | # | Server | Tools | Tokens | Category |
 | --: | :-- | --: | --: | :-- |
-| 1 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,297 | filesystem |
+| 1 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,331 | filesystem |
 | 2 | [memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) | 9 | 1,211 | memory |
 | 3 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,144 | reasoning |
 | 4 | [fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch) | 0 | 0 | web |
