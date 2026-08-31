@@ -1,8 +1,8 @@
 # MCP Server Token Leaderboard
 
-_Generated: 2026-08-24T08:39:22.704Z · gateway v0.2.0_
+_Generated: 2026-08-31T15:44:02.010Z · gateway v0.2.0_
 
-**6** of 6 benchmarked servers started successfully, spending **4,686** tokens total on tool schemas.
+**6** of 6 benchmarked servers started successfully, spending **4,691** tokens total on tool schemas.
 
 > Measured by connecting each server and running `list_tools`, then summing estimated tokens across every advertised tool (name + description + JSON Schema). Numbers are directional — an MCP client that picks up 5 of these is spending this much just on boilerplate before you type a message.
 
@@ -13,7 +13,7 @@ _Generated: 2026-08-24T08:39:22.704Z · gateway v0.2.0_
 | 1 | [fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch) | 0 | 0 | web |
 | 2 | [git](https://github.com/modelcontextprotocol/servers/tree/main/src/git) | 0 | 0 | vcs |
 | 3 | [time](https://github.com/modelcontextprotocol/servers/tree/main/src/time) | 0 | 0 | utilities |
-| 4 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,144 | reasoning |
+| 4 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,149 | reasoning |
 | 5 | [memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) | 9 | 1,211 | memory |
 | 6 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,331 | filesystem |
 
@@ -23,7 +23,7 @@ _Generated: 2026-08-24T08:39:22.704Z · gateway v0.2.0_
 | --: | :-- | --: | --: | :-- |
 | 1 | [filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 14 | 2,331 | filesystem |
 | 2 | [memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) | 9 | 1,211 | memory |
-| 3 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,144 | reasoning |
+| 3 | [sequentialthinking](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking) | 1 | 1,149 | reasoning |
 | 4 | [fetch](https://github.com/modelcontextprotocol/servers/tree/main/src/fetch) | 0 | 0 | web |
 | 5 | [git](https://github.com/modelcontextprotocol/servers/tree/main/src/git) | 0 | 0 | vcs |
 | 6 | [time](https://github.com/modelcontextprotocol/servers/tree/main/src/time) | 0 | 0 | utilities |
