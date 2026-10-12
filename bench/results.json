@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-05T16:40:41.399Z",
+  "generatedAt": "2026-10-12T17:13:12.224Z",
   "gatewayVersion": "0.2.0",
   "totals": {
     "servers": 6,
     "ok": 6,
     "error": 0,
-    "totalTokens": 4701
+    "totalTokens": 4798
   },
   "entries": [
     {
@@ -18,66 +18,66 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
       "category": "filesystem",
-      "durationMs": 4589,
+      "durationMs": 14749,
       "status": "ok",
-      "tokens": 2331,
+      "tokens": 2353,
       "tools": 14,
       "toolBreakdown": [
         {
           "name": "filesystem__read_file",
-          "tokens": 135
+          "tokens": 136
         },
         {
           "name": "filesystem__read_text_file",
-          "tokens": 243
+          "tokens": 244
         },
         {
           "name": "filesystem__read_media_file",
-          "tokens": 124
+          "tokens": 126
         },
         {
           "name": "filesystem__read_multiple_files",
-          "tokens": 198
+          "tokens": 200
         },
         {
           "name": "filesystem__write_file",
-          "tokens": 132
+          "tokens": 133
         },
         {
           "name": "filesystem__edit_file",
-          "tokens": 211
+          "tokens": 213
         },
         {
           "name": "filesystem__create_directory",
-          "tokens": 146
+          "tokens": 148
         },
         {
           "name": "filesystem__list_directory",
-          "tokens": 145
+          "tokens": 147
         },
         {
           "name": "filesystem__list_directory_with_sizes",
-          "tokens": 184
+          "tokens": 186
         },
         {
           "name": "filesystem__directory_tree",
-          "tokens": 181
+          "tokens": 182
         },
         {
           "name": "filesystem__move_file",
-          "tokens": 163
+          "tokens": 164
         },
         {
           "name": "filesystem__search_files",
-          "tokens": 210
+          "tokens": 211
         },
         {
           "name": "filesystem__get_file_info",
-          "tokens": 141
+          "tokens": 143
         },
         {
           "name": "filesystem__list_allowed_directories",
-          "tokens": 118
+          "tokens": 120
         }
       ]
     },
@@ -90,7 +90,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch",
       "category": "web",
-      "durationMs": 799,
+      "durationMs": 805,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -105,14 +105,14 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/memory",
       "category": "memory",
-      "durationMs": 2773,
+      "durationMs": 2738,
       "status": "ok",
-      "tokens": 1211,
+      "tokens": 1286,
       "tools": 9,
       "toolBreakdown": [
         {
           "name": "memory__create_entities",
-          "tokens": 175
+          "tokens": 245
         },
         {
           "name": "memory__create_relations",
@@ -140,7 +140,7 @@
         },
         {
           "name": "memory__search_nodes",
-          "tokens": 99
+          "tokens": 104
         },
         {
           "name": "memory__open_nodes",
@@ -157,7 +157,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking",
       "category": "reasoning",
-      "durationMs": 3134,
+      "durationMs": 4106,
       "status": "ok",
       "tokens": 1159,
       "tools": 1,
@@ -177,7 +177,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/git",
       "category": "vcs",
-      "durationMs": 884,
+      "durationMs": 805,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
@@ -192,7 +192,7 @@
       ],
       "homepage": "https://github.com/modelcontextprotocol/servers/tree/main/src/time",
       "category": "utilities",
-      "durationMs": 797,
+      "durationMs": 820,
       "status": "ok",
       "tokens": 0,
       "tools": 0,
