@@ -1,6 +1,6 @@
 # MCP Server Token Leaderboard
 
-_Generated: 2026-10-12T17:13:12.224Z · gateway v0.2.0_
+_Generated: 2026-10-19T15:12:12.407Z · gateway v0.2.0_
 
 **6** of 6 benchmarked servers started successfully, spending **4,798** tokens total on tool schemas.
 
